@@ -10,5 +10,5 @@ jobs:
       - name: Assign issues to project
         uses: technote-space/create-project-card-action@v1
         with:
-          PROJECT: OSP
+          PROJECT: Source System App
           COLUMN: To do
