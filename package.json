@@ -1,0 +1,22 @@
+{
+  "name": "sourcesystemapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saamsa/SourceSystemApp.git"
+  },
+  "author": "JB, SF, KM, AT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Saamsa/SourceSystemApp/issues"
+  },
+  "homepage": "https://github.com/Saamsa/SourceSystemApp#readme",
+  "dependencies": {
+    "node": "^16.10.0"
+  }
+}
