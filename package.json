@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/Saamsa/SourceSystemApp#readme",
   "dependencies": {
-    "node": "^16.10.0"
+    "kafkajs": "^1.15.0"
   }
 }
