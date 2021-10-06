@@ -31,7 +31,7 @@ const createCaseReport = () => {
     dateLastContact: Date,
     countryLastTravel: string,
     dateLastTravel: Date,
-  };
+  }
   
   // Declare an object with case information
   const covidPositive = {

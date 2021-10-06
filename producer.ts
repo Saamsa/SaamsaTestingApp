@@ -1,6 +1,6 @@
 import { Kafka } from 'kafkajs';
 
-async function createProducer(producerName: string, message: object, topic: string) {
+async function createProducer(producerName: string, message:{}, topic: string) {
   
   // Configure the client to a seed broker
   const kafka = new Kafka({
