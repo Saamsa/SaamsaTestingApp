@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "",
+    "start": "tsc -p ./ && node dist/services/eventStreamer.js",
     "test": "echo && exit 0"
   },
   "repository": {
