@@ -7,7 +7,7 @@ import { consumer } from './consumer';
 //
 AWS.config.update({
     region: "us-east-2",
-    endpoint: "http://localhost:8000"
+    // endpoint: "http://localhost:8000"
   });
 
 const awsConnector = {};

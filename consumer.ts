@@ -62,8 +62,3 @@ await consumer.run({
 };
 
  export { createConsumer };
-
- createConsumer(
-  'CovidGroup1',
-  'initial_report'
-);
