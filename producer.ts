@@ -2,7 +2,7 @@ import { Kafka } from 'kafkajs';
 
 async function createProducer(producerName: string, message: Record<string, unknown>, topic: string) {
   
-  // Configure the client to a seed broker
+  // Configure a seed broker
   const kafka = new Kafka({
     clientId: producerName,
     brokers: ['kafka:9092'],
@@ -21,7 +21,7 @@ async function createProducer(producerName: string, message: Record<string, unkn
   // Write a message to producer
   try {
     await producer.send({
-      topic: topic,
+      topic,
       messages: [{ value: JSON.stringify(message) }],  
         //could also specify key [{ key: 'my-key', value: 'my-value'}],
         //other options: partition, timestamp, headers
