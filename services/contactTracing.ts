@@ -1,4 +1,4 @@
-import faker from 'faker';
+import * as faker from 'faker';
 
 /**
  * @function createCaseReport creates a fake covid positive case report
