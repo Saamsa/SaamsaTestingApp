@@ -10,5 +10,5 @@ jobs:
       - name: Assign PR to Code Review
         uses: technote-space/create-project-card-action@v1
         with:
-          PROJECT: Source System App
+          PROJECT: Saamsa Testing App Tracking
           COLUMN: Review in progress

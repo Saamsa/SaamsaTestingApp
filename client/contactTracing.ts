@@ -37,7 +37,7 @@ const createCaseReport = () => {
   const covidPositive = {
     eventId: faker.datatype.uuid(),
     eventTimstamp: faker.datatype.datetime(),
-    eventName: 'initial_report',
+    eventName: 'initial_report2',
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     middleName: faker.name.middleName(),

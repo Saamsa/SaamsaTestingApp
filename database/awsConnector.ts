@@ -21,14 +21,13 @@ console.log("The message recieved inside sendEachMessage is : ", messageObj);
     //Document client simplifies working with items in Amazon DynamoDB
 const docClient = new AWS.DynamoDB.DocumentClient();
 
-
 //name of the dynamoDB table to which data is being inserted
 const table = "patientData"
 
 //store message data and table name in a variable {}
 const outputStream = {
     TableName: table,
-    Item: { 
+    Item: {
     topic: 'topic-name', // to be changed
      message: "message" //to be changed to match Fakerjs data
     }
@@ -44,9 +43,6 @@ docClient.put(outputStream, function(err,data) {
     else {
         console.log("Added Item : ", JSON.stringify(data) )
     }
-});       
+});
 //return
     }
-
-
-
