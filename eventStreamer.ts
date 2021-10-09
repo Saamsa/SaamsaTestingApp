@@ -1,6 +1,6 @@
-import { createProducer } from '../producer';
-import { createCaseReport } from './contactTracing';
-import { createConsumer } from '../consumer';
+import { createProducer } from './kafka/producer';
+import { createCaseReport } from './client/contactTracing';
+import { createConsumer } from './kafka/consumer';
 
 /**
  * Creates a fake covid positive report 
