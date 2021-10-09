@@ -1,11 +1,14 @@
 import { Kafka } from 'kafkajs';
 
-async function createProducer(producerName: string, message: Record<string, unknown>, topic: string) {
-  
+async function createProducer(
+  producerName: string,
+  message: Record<string, unknown>,
+  topic: string
+) {
   // Configure the client to a seed broker
   const kafka = new Kafka({
     clientId: producerName,
-    brokers: ['localhost:9092'],
+    brokers: ['kafka:9092'],
   });
 
   // Create an instance of a producer on kafka broker
@@ -22,12 +25,12 @@ async function createProducer(producerName: string, message: Record<string, unkn
   try {
     await producer.send({
       topic: topic,
-      messages: [{ value: JSON.stringify(message) }],  
-        //could also specify key [{ key: 'my-key', value: 'my-value'}],
-        //other options: partition, timestamp, headers
+      messages: [{ key: 'initial_report', value: JSON.stringify(message) }],
+      //could also specify key [{ key: 'my-key', value: 'my-value'}],
+      //other options: partition, timestamp, headers
       //acks: -1 all, 0 none, 1 just leader (default is -1)
       //timeout:
-      //compression: 
+      //compression:
     });
   } catch (error) {
     console.log(error);
