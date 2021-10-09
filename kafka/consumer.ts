@@ -12,16 +12,16 @@ import * as Kafka from 'kafkajs';
   // Configure AWS IAM client with kafka broker
    const kafka = new Kafka.Kafka({
      clientId: groupId,
-     brokers: ['kafka:9092'],
+     brokers: ['localhost:9092'],
      // authenticationTimeout: 1000,
      // reauthenticationThreshold: 10000,
-     ssl: true,
-     sasl: {
-       mechanism: 'aws',
-       authorizationIdentity: 'arn:aws:iam::852274558021:user/DynamoDBTemp', // UserId or RoleId
-       accessKeyId: 'AKIA4M34FWRC7OL2YPNK',
-       secretAccessKey: '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'
-      },
+    //  ssl: true,
+    //  sasl: {
+    //    mechanism: 'aws',
+    //    authorizationIdentity: 'arn:aws:iam::852274558021:user/DynamoDBTemp', // UserId or RoleId
+    //    accessKeyId: 'AKIA4M34FWRC7OL2YPNK',
+    //    secretAccessKey: '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'
+      // },
     });
     // Creating kafka consumer with required group ID
  const consumer = kafka.consumer({ groupId: 'test-group' });
@@ -40,7 +40,7 @@ await consumer.run({
 
     console.log({
       key: message.key.toString(),
-      value: message.value.toString(),
+      value: message.value!.toString(),
       headers: message.headers,
     
     })

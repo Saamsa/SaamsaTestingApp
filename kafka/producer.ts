@@ -5,7 +5,7 @@ async function createProducer(producerName: string, message: Record<string, unkn
   // Configure the client to a seed broker
   const kafka = new Kafka({
     clientId: producerName,
-    brokers: ['kafka:9092'],
+    brokers: ['localhost:9092'],
   });
 
   // Create an instance of a producer on kafka broker

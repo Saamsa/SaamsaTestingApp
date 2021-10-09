@@ -1,7 +1,4 @@
 import AWS from 'aws-sdk';
-const { producer } = require('./producer'); 
-const { Kafka } = require ('kafkajs');
-import { consumer } from './consumer';
 //
 
 //
