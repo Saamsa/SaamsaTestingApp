@@ -18,9 +18,9 @@ import * as Kafka from 'kafkajs';
     //  ssl: true,
     //  sasl: {
     //    mechanism: 'aws',
-    //    authorizationIdentity: 'arn:aws:iam::852274558021:user/DynamoDBTemp', // UserId or RoleId
-    //    accessKeyId: 'AKIA4M34FWRC7OL2YPNK',
-    //    secretAccessKey: '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'
+    //    authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
+    //    accessKeyId: process.env.accessKeyId,
+    //    secretAccessKey: process.env.secretAccessKey
       // },
     });
     // Creating kafka consumer with required group ID
