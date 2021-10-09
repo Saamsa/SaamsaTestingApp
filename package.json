@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Saamsa/SourceSystemApp.git"
+    "url": "git+https://github.com/Saamsa/SaamsaTestingApp.git"
   },
   "author": "JB, SF, KM, AT",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Saamsa/SourceSystemApp/issues"
+    "url": "https://github.com/Saamsa/SaamsaTestingApp/issues"
   },
-  "homepage": "https://github.com/Saamsa/SourceSystemApp#readme",
+  "homepage": "https://github.com/Saamsa/SaamsaTestingApp#readme",
   "dependencies": {
     "aws-sdk": "^2.1003.0",
     "kafkajs": "^1.15.0"
