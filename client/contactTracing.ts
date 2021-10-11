@@ -9,7 +9,7 @@ const createCaseReport = () => {
   // Assign proper datatypes
   interface covidPositive {
     eventId: string,
-    eventDateTime: Date, 
+    eventDateTime: string, 
     eventName: string, 
     firstName: string, 
     lastName: string,
@@ -28,9 +28,9 @@ const createCaseReport = () => {
     jobArea: string, 
     jobTitle: string,
     nameLastContact: string,
-    dateLastContact: Date,
+    dateLastContact: string,
     countryLastTravel: string,
-    dateLastTravel: Date,
+    dateLastTravel: string,
   }
   
   // Declare an object with case information

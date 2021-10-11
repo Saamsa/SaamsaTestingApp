@@ -1,4 +1,5 @@
 import * as Kafka from 'kafkajs';
+import ddb_putitem from '../database/ddb_putitem';
 
 /**
  * Creates a producer object for export later
@@ -39,7 +40,7 @@ const createConsumer = async (groupId: string, topic: string) => {
         console.log('anything');
         console.log({
           key: message.key.toString(),
-          value: JSON.parse(message.value!.toString()),
+          value: JSON.parse(message.value!.toString()), // converts producer message to object
           headers: message.headers,
         });
       } catch (err) {
