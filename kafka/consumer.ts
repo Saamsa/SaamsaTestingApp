@@ -1,5 +1,5 @@
-import * as Kafka from 'kafkajs';
-import AWS from 'aws-sdk';
+import * as Kafka from "kafkajs";
+import AWS from "aws-sdk";
 
 AWS.config.update({
   region: "us-east-2",
@@ -19,37 +19,36 @@ const createConsumer = async (groupId: string, topic: string) => {
   // Configure AWS IAM client with kafka broker
   const kafka = new Kafka.Kafka({
     clientId: groupId,
-    brokers: ['kafka:9092'],
+    brokers: ["kafka:9092"],
     // authenticationTimeout: 1000,
     // reauthenticationThreshold: 10000,
-    //  ssl: true,
-    //  sasl: {
-    //    mechanism: 'aws',
-    //    authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
-    //    accessKeyId: process.env.accessKeyId,
-    //    secretAccessKey: process.env.secretAccessKey
-    // },
+     ssl: true,
+     sasl: {
+       mechanism: 'aws',
+       authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
+       accessKeyId: process.env.accessKeyId,
+       secretAccessKey: process.env.secretAccessKey
+    },
   });
   // Creating kafka consumer with required group ID
-  const consumer = kafka.consumer({ groupId: 'test-group2' });
+  const consumer = kafka.consumer({ groupId: "test-group2" });
   //  kafka.consumer.groupId = {groupId};
 
   await consumer.connect();
   await consumer.subscribe({ topic: topic, fromBeginning: true });
-  console.log('something');
+  console.log("consumer subscribed to topic");
   await consumer.run({
     // autoCommitInterval: 5000,
     // eachMessage: sendEachMessage, -> to send to the DB
     eachMessage: async ({ topic, partition, message }) => {
-      console.log(message);
+      // console.log('message: ', message);
       try {
         // listen for each message being sent, and then send the messages to the DB
-        console.log('anything');
-        console.log({
+        console.log("consumer message value in createConsumer at create.ts:", {
           key: message.key.toString(),
           value: JSON.parse(message.value!.toString()), // converts producer message to object
-          headers: message.headers,
         });
+        sendToDb();
       } catch (err) {
         console.log(
           `There was an error consuming messages in consumer.run: ${err}`
@@ -57,12 +56,12 @@ const createConsumer = async (groupId: string, topic: string) => {
       }
     },
   });
-}
+};
 
 // add code to insert data into dynamoDB
 // type sendEachMessage = () => void;
 
-const sendEachMessage = async () => {
+const sendToDb = async () => {
   // Declare a new variable set to the parsed JSON of message value
   // const messageObj = await JSON.parse(message.value);
   // console.log("The message recieved inside sendEachMessage is : ", messageObj);
@@ -73,45 +72,44 @@ const sendEachMessage = async () => {
   // destructure the object to send the data to dynamo DB
   const params = {
     TableName: tableName,
-    Item: { 
-      'eventId' : {S: '1234'}
+    Item: {
+      eventId: { S: "1234" },
       // JSON(messageObj)
-    // 'eventId': {S: message.value.eventId },
-    // 'eventDateTime': {S: message.value.eventDateTime}, 
-    // 'eventName': {S: message.value.eventName} ,
-    // 'firstName': {S: message.value.firstName}, 
-    // 'lastName': {S: message.value.lastName},
-    // 'middleName': {S: message.value.middleName},
-    // 'gender': {S: message.value.gender},
-    // 'street': {S: message.value.street},
-    // 'street2': {S: message.value.street2},
-    // 'city': {S: message.value.city},
-    // 'county': {S: message.value.county},
-    // 'state': {S: message.value.state},
-    // 'zip': {N: message.value.zip},
-    // 'latitude': {N: message.value.latitude},
-    // 'longitude': {N: message.value.longitude}, 
-    // 'phone': {N: message.value.phone},
-    // 'email': {S: message.value.email}, 
-    // 'jobArea': {S: message.value.jobArea}, 
-    // 'jobTitle': {S: message.value.jobTitle},
-    // 'nameLastContact': {S: message.value.nameLastContact},
-    // 'dateLastContact': {S: message.value.dateLastContact},
-    // 'countryLastTravel': {S: message.value.countryLastTravel},
-    // 'dateLastTravel': {S: message.value.dateLastTravel}
-  }
-}
+      // 'eventId': {S: message.value.eventId },
+      // 'eventDateTime': {S: message.value.eventDateTime},
+      // 'eventName': {S: message.value.eventName} ,
+      // 'firstName': {S: message.value.firstName},
+      // 'lastName': {S: message.value.lastName},
+      // 'middleName': {S: message.value.middleName},
+      // 'gender': {S: message.value.gender},
+      // 'street': {S: message.value.street},
+      // 'street2': {S: message.value.street2},
+      // 'city': {S: message.value.city},
+      // 'county': {S: message.value.county},
+      // 'state': {S: message.value.state},
+      // 'zip': {N: message.value.zip},
+      // 'latitude': {N: message.value.latitude},
+      // 'longitude': {N: message.value.longitude},
+      // 'phone': {N: message.value.phone},
+      // 'email': {S: message.value.email},
+      // 'jobArea': {S: message.value.jobArea},
+      // 'jobTitle': {S: message.value.jobTitle},
+      // 'nameLastContact': {S: message.value.nameLastContact},
+      // 'dateLastContact': {S: message.value.dateLastContact},
+      // 'countryLastTravel': {S: message.value.countryLastTravel},
+      // 'dateLastTravel': {S: message.value.dateLastTravel}
+    },
+  };
 
-  console.log("adding a new item from consumer to AWS DB..")
+  console.log("adding a new item from consumer to AWS DB..");
 
-// Send/put data to dynamoDB from the consumer
-ddb.putItem(params, function(err,data) {
-  if(err) {
+  // Send/put data to dynamoDB from the consumer
+  ddb.putItem(params, function (err, data) {
+    if (err) {
       console.error("Unable to add item, Error: ", err);
-  }
-  else {
-      console.log("Added Item : ", JSON.stringify(data) )
-  }
-});
-}
-  export { createConsumer };
+    } else {
+      console.log("Added Item : ", JSON.stringify(data));
+    }
+  });
+};
+export { createConsumer };

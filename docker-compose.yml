@@ -25,9 +25,9 @@ services:
     depends_on:
       - zookeeper
 
-  testing:
-    image: testing2
-    container_name: saamsaTestingApp
+  saamsa-testing-app:
+    image: saamsa-testing-app
+    container_name: 'saamsa-testing-app'
     ports:
       - '3000:3000'
     depends_on:

@@ -9,7 +9,7 @@ const createCaseReport = () => {
   // Assign proper datatypes
   interface covidPositive {
     eventId: string,
-    eventDateTime: string, 
+    eventDateTime: Date, 
     eventName: string, 
     firstName: string, 
     lastName: string,
@@ -28,9 +28,9 @@ const createCaseReport = () => {
     jobArea: string, 
     jobTitle: string,
     nameLastContact: string,
-    dateLastContact: string,
+    dateLastContact: Date,
     countryLastTravel: string,
-    dateLastTravel: string,
+    dateLastTravel: Date,
   }
   
   // Declare an object with case information
@@ -59,7 +59,6 @@ const createCaseReport = () => {
     countryLastTravel: faker.address.country(), 
     dateLastTravel: faker.date.past(),
   };
-
   return covidPositive;
 };
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "tsc -p ./ && node dist/eventStreamer.js",
+    "start": "docker build . -t saamsa-testing-app && docker compose up -d",
     "test": "echo && exit 0"
   },
   "repository": {
