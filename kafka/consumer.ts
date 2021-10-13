@@ -1,24 +1,21 @@
 import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
-import {ServiceConfigurationOptions} from 'aws-sdk/lib/service';
-// const endpoint = "https://dynamodb.us-east-2.amazonaws.com";
-// connect to AWS from node.js
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname+'./../.env' });
 
-const serviceConfigOptions : ServiceConfigurationOptions = {
-  region: 'us-east-2',
-  endpoint: 'https://dynamodb.us-east-2.amazonaws.com'
+// config details required to connect to AWS on server 
+
+const config = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, 
+    region: 'us-east-1',
+    endpoint: 'dynamodb.us-east-1.amazonaws.com'
 };
-AWS.config.update(serviceConfigOptions);
-AWS.config.update({
-  // authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
-  accessKeyId: process.env.accessKeyId,
-  secretAccessKey: process.env.secretAccessKey
-});
-
-const ddb = new AWS.DynamoDB();
+// New instantiation of DynamoDB with config details passed in directly
+const ddb = new AWS.DynamoDB(config); 
 
 /**
- * Creates a producer object for export later
+ * Creates a consumer object
  * @param groupId - required for consumer creation in Kafka
  * @param topic - topic that matches producer
  *
@@ -27,17 +24,7 @@ const createConsumer = async (groupId: string, topic: string) => {
   // Creating a new Kafka instance
   const kafka = new Kafka.Kafka({
     clientId: groupId,
-    brokers: ["kafka:9092"],
-    // authenticationTimeout: 1000,
-    // reauthenticationThreshold: 10000,
-    // Configure AWS IAM client with kafka broker
-    //  ssl: true,
-    //  sasl: {
-    //    mechanism: 'aws',
-    //    authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
-    //    accessKeyId: process.env.accessKeyId,
-    //    secretAccessKey: process.env.secretAccessKey
-    // },
+    brokers: ["kafka:9092"]
   });
   // Creating kafka consumer with required group ID
   const consumer = kafka.consumer({ groupId: "test-group2" });
@@ -83,7 +70,7 @@ const sendToDb = async () => {
     TableName: tableName,
     Item: {
       eventId: { S: "1234" },
-      // JSON(messageObj)
+      // JSON(messageObj!)
       // 'eventId': {S: message.value.eventId },
       // 'eventDateTime': {S: message.value.eventDateTime},
       // 'eventName': {S: message.value.eventName} ,
@@ -115,7 +102,7 @@ const sendToDb = async () => {
   // Send/put data to dynamoDB from the consumer
   ddb.putItem(params, function (err, data) {
     if (err) {
-      console.error("Unable to add item, Error: ", err);
+      console.error("Unable to add item, ", err);
     } else {
       console.log("Added Item : ", JSON.stringify(data));
     }
