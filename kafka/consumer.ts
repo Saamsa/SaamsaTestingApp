@@ -1,34 +1,43 @@
 import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
+import {ServiceConfigurationOptions} from 'aws-sdk/lib/service';
+// const endpoint = "https://dynamodb.us-east-2.amazonaws.com";
+// connect to AWS from node.js
 
+const serviceConfigOptions : ServiceConfigurationOptions = {
+  region: 'us-east-2',
+  endpoint: 'https://dynamodb.us-east-2.amazonaws.com'
+};
+AWS.config.update(serviceConfigOptions);
 AWS.config.update({
-  region: "us-east-2",
-  // endpoint: "http://localhost:8000"
+  // authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey
 });
+
+const ddb = new AWS.DynamoDB();
+
 /**
  * Creates a producer object for export later
  * @param groupId - required for consumer creation in Kafka
  * @param topic - topic that matches producer
  *
  */
-
-const ddb = new AWS.DynamoDB();
-
 const createConsumer = async (groupId: string, topic: string) => {
   // Creating a new Kafka instance
-  // Configure AWS IAM client with kafka broker
   const kafka = new Kafka.Kafka({
     clientId: groupId,
     brokers: ["kafka:9092"],
     // authenticationTimeout: 1000,
     // reauthenticationThreshold: 10000,
-     ssl: true,
-     sasl: {
-       mechanism: 'aws',
-       authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
-       accessKeyId: process.env.accessKeyId,
-       secretAccessKey: process.env.secretAccessKey
-    },
+    // Configure AWS IAM client with kafka broker
+    //  ssl: true,
+    //  sasl: {
+    //    mechanism: 'aws',
+    //    authorizationIdentity: process.env.authorizationIdentity, // UserId or RoleId
+    //    accessKeyId: process.env.accessKeyId,
+    //    secretAccessKey: process.env.secretAccessKey
+    // },
   });
   // Creating kafka consumer with required group ID
   const consumer = kafka.consumer({ groupId: "test-group2" });
@@ -45,7 +54,7 @@ const createConsumer = async (groupId: string, topic: string) => {
       try {
         // listen for each message being sent, and then send the messages to the DB
         console.log("consumer message value in createConsumer at create.ts:", {
-          key: message.key.toString(),
+          // key: message.key.toString(),
           value: JSON.parse(message.value!.toString()), // converts producer message to object
         });
         sendToDb();
