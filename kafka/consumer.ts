@@ -1,7 +1,7 @@
 import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
 import * as dotenv from "dotenv";
-import { messageInterface, DBmessageInterface } from "../messageInterface";
+import { messageInterface } from "../messageInterface";
 dotenv.config({ path: __dirname+'../.env' });
 
 // config details required to connect to AWS on server 
@@ -37,9 +37,9 @@ const createConsumer = async (groupId: string, topic: string) => {
   await consumer.run({
     // autoCommitInterval: 5000,
     // eachMessage: sendEachMessage, -> to send to the DB
-    eachMessage: async ({ topic, partition, message }) => {
+    eachMessage: async ({ message }) => {
       try {
-        // convert producer message to object
+        // producer message comes in as Buffer, so we need to convert producer message to readable object of Strings
         const messageObj = JSON.parse(message.value!.toString());
         
         // listen for each message being sent, and then send the messages to the DB
@@ -57,50 +57,22 @@ const createConsumer = async (groupId: string, topic: string) => {
 
 
 // add code to insert data into dynamoDB
-// type sendEachMessage = () => void;
 
 const sendToDb = async (tableName: string, messageObj: messageInterface) => {
-
+// create param types
   type params = {
     TableName: string;
-    Item: DBmessageInterface;
+    Item: messageInterface;
   }
-  
+  // create param object
   const params: params = {
     TableName: tableName,
-    Item: 
-    // messageObj
-    {
-      // eventId: { S: "1234" },
-      'eventId': {S: messageObj.eventId },
-      // 'eventTimestamp': {S: messageObj.eventTimestamp},
-      'eventName': {S: messageObj.eventName} ,
-      'firstName': {S: messageObj.firstName},
-      'lastName': {S: messageObj.lastName},
-      'middleName': {S: messageObj.middleName},
-      'gender': {S: messageObj.gender},
-      'street': {S: messageObj.street},
-      'street2': {S: messageObj.street2},
-      'city': {S: messageObj.city},
-      'county': {S: messageObj.county},
-      'state': {S: messageObj.state},
-      'zip': {S: messageObj.zip},
-      'latitude': {S: messageObj.latitude},
-      'longitude': {S: messageObj.longitude},
-      'phone': {S: messageObj.phone},
-      'email': {S: messageObj.email},
-      'jobArea': {S: messageObj.jobArea},
-      'jobTitle': {S: messageObj.jobTitle},
-      'nameLastContact': {S: messageObj.nameLastContact},
-      // 'dateLastContact': {S: messageObj.dateLastContact},
-      'countryLastTravel': {S: messageObj.countryLastTravel},
-      // 'dateLastTravel': {S: messageObj.dateLastTravel}
-    },
+    Item: messageObj
   };
 
   console.log("adding a new item from consumer to AWS DB..");
 
-  // Use the DynamoDB putItem functionality to add message to database
+  // Use the DynamoDB putItem functionality to add message to database (put is from DocumentClient)
   ddb.put(params, function (err, data) {
     if (err) {
       console.error("Unable to add item, ", err);

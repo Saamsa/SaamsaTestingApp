@@ -22,36 +22,6 @@ export interface messageInterface {
     nameLastContact?: string,
     dateLastContact?: Date,
     countryLastTravel?: string,
-    dateLastTravel?: Date
+    dateLastTravel?: Date 
   }
 
-type dbItemObject = {
-    S?: string | Date;
-    N?: number;
-}
-
-export type DBmessageInterface = {
-    eventId?: dbItemObject,
-    eventTimestamp?: dbItemObject, 
-    eventName?: dbItemObject, 
-    firstName?: dbItemObject, 
-    lastName?: dbItemObject,
-    middleName?: dbItemObject,
-    gender?: dbItemObject,
-    street?: dbItemObject,
-    street2?:dbItemObject,
-    city?: dbItemObject,
-    county?: dbItemObject,
-    state?: dbItemObject,
-    zip?: dbItemObject,
-    latitude?: dbItemObject,
-    longitude?: dbItemObject, 
-    phone?: dbItemObject,
-    email?: dbItemObject,  
-    jobArea?: dbItemObject, 
-    jobTitle?: dbItemObject,
-    nameLastContact?: dbItemObject,
-    dateLastContact?: dbItemObject,
-    countryLastTravel?: dbItemObject,
-    dateLastTravel?: dbItemObject
-  }
