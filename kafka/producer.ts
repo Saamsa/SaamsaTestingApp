@@ -1,10 +1,9 @@
 import { Kafka } from 'kafkajs';
-import { CovidPositive } from '../client/contactTracing';
-
+import { messageInterface } from '../messageInterface';
 
 async function createProducer(
   producerName: string,
-  message: CovidPositive,
+  message: messageInterface,
   topic: string
 ) :Promise<void> {
   // Configure the client to a seed broker
@@ -43,3 +42,4 @@ async function createProducer(
 }
 
 export { createProducer };
+
