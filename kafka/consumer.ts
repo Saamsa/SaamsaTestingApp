@@ -1,18 +1,19 @@
 import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
 import * as dotenv from "dotenv";
-dotenv.config({ path: __dirname+'./../.env' });
+import { messageInterface, DBmessageInterface } from "../messageInterface";
+dotenv.config({ path: __dirname+'../.env' });
 
 // config details required to connect to AWS on server 
 
 const config = {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, 
+    accessKeyId: 'AKIA4M34FWRC5KKYFA6Z',
+    secretAccessKey: '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', 
     region: 'us-east-1',
     endpoint: 'dynamodb.us-east-1.amazonaws.com'
 };
 // New instantiation of DynamoDB with config details passed in directly
-const ddb = new AWS.DynamoDB(config); 
+const ddb = new AWS.DynamoDB.DocumentClient(config); 
 
 /**
  * Creates a consumer object
@@ -37,14 +38,14 @@ const createConsumer = async (groupId: string, topic: string) => {
     // autoCommitInterval: 5000,
     // eachMessage: sendEachMessage, -> to send to the DB
     eachMessage: async ({ topic, partition, message }) => {
-      // console.log('message: ', message);
       try {
+        // convert producer message to object
+        const messageObj = JSON.parse(message.value!.toString());
+        
         // listen for each message being sent, and then send the messages to the DB
-        console.log("consumer message value in createConsumer at create.ts:", {
-          // key: message.key.toString(),
-          value: JSON.parse(message.value!.toString()), // converts producer message to object
-        });
-        sendToDb();
+        console.log("consumer message value in createConsumer at create.ts:", messageObj);
+        // send the message to the defined table in DynamoDb. Currently hardcoded to our patientData table.
+        sendToDb("patientData", messageObj);
       } catch (err) {
         console.log(
           `There was an error consuming messages in consumer.run: ${err}`
@@ -54,53 +55,53 @@ const createConsumer = async (groupId: string, topic: string) => {
   });
 };
 
+
 // add code to insert data into dynamoDB
 // type sendEachMessage = () => void;
 
-const sendToDb = async () => {
-  // Declare a new variable set to the parsed JSON of message value
-  // const messageObj = await JSON.parse(message.value);
-  // console.log("The message recieved inside sendEachMessage is : ", messageObj);
+const sendToDb = async (tableName: string, messageObj: messageInterface) => {
 
-  //name of the dynamoDB table to which data is being inserted
-  const tableName = "patientData";
-
-  // destructure the object to send the data to dynamo DB
-  const params = {
+  type params = {
+    TableName: string;
+    Item: DBmessageInterface;
+  }
+  
+  const params: params = {
     TableName: tableName,
-    Item: {
-      eventId: { S: "1234" },
-      // JSON(messageObj!)
-      // 'eventId': {S: message.value.eventId },
-      // 'eventDateTime': {S: message.value.eventDateTime},
-      // 'eventName': {S: message.value.eventName} ,
-      // 'firstName': {S: message.value.firstName},
-      // 'lastName': {S: message.value.lastName},
-      // 'middleName': {S: message.value.middleName},
-      // 'gender': {S: message.value.gender},
-      // 'street': {S: message.value.street},
-      // 'street2': {S: message.value.street2},
-      // 'city': {S: message.value.city},
-      // 'county': {S: message.value.county},
-      // 'state': {S: message.value.state},
-      // 'zip': {N: message.value.zip},
-      // 'latitude': {N: message.value.latitude},
-      // 'longitude': {N: message.value.longitude},
-      // 'phone': {N: message.value.phone},
-      // 'email': {S: message.value.email},
-      // 'jobArea': {S: message.value.jobArea},
-      // 'jobTitle': {S: message.value.jobTitle},
-      // 'nameLastContact': {S: message.value.nameLastContact},
-      // 'dateLastContact': {S: message.value.dateLastContact},
-      // 'countryLastTravel': {S: message.value.countryLastTravel},
-      // 'dateLastTravel': {S: message.value.dateLastTravel}
+    Item: 
+    // messageObj
+    {
+      // eventId: { S: "1234" },
+      'eventId': {S: messageObj.eventId },
+      // 'eventTimestamp': {S: messageObj.eventTimestamp},
+      'eventName': {S: messageObj.eventName} ,
+      'firstName': {S: messageObj.firstName},
+      'lastName': {S: messageObj.lastName},
+      'middleName': {S: messageObj.middleName},
+      'gender': {S: messageObj.gender},
+      'street': {S: messageObj.street},
+      'street2': {S: messageObj.street2},
+      'city': {S: messageObj.city},
+      'county': {S: messageObj.county},
+      'state': {S: messageObj.state},
+      'zip': {S: messageObj.zip},
+      'latitude': {S: messageObj.latitude},
+      'longitude': {S: messageObj.longitude},
+      'phone': {S: messageObj.phone},
+      'email': {S: messageObj.email},
+      'jobArea': {S: messageObj.jobArea},
+      'jobTitle': {S: messageObj.jobTitle},
+      'nameLastContact': {S: messageObj.nameLastContact},
+      // 'dateLastContact': {S: messageObj.dateLastContact},
+      'countryLastTravel': {S: messageObj.countryLastTravel},
+      // 'dateLastTravel': {S: messageObj.dateLastTravel}
     },
   };
 
   console.log("adding a new item from consumer to AWS DB..");
 
-  // Send/put data to dynamoDB from the consumer
-  ddb.putItem(params, function (err, data) {
+  // Use the DynamoDB putItem functionality to add message to database
+  ddb.put(params, function (err, data) {
     if (err) {
       console.error("Unable to add item, ", err);
     } else {
@@ -108,4 +109,5 @@ const sendToDb = async () => {
     }
   });
 };
+
 export { createConsumer };

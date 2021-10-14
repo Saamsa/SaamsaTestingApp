@@ -1,8 +1,9 @@
 import { Kafka } from 'kafkajs';
+import { messageInterface } from '../messageInterface';
 
 async function createProducer(
   producerName: string,
-  message: Record<string, unknown>,
+  message: messageInterface,
   topic: string
 ) {
   // Configure the client to a seed broker
@@ -41,3 +42,4 @@ async function createProducer(
 }
 
 export { createProducer };
+

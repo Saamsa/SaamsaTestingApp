@@ -18,7 +18,7 @@ app.get('/createData', (req, res) => {
   createProducer(
     'covid_positive_case_report',
     covidPositiveCase,
-    covidPositiveCase.eventName
+    covidPositiveCase.eventName!
     );
   res.sendStatus(200);
 });
