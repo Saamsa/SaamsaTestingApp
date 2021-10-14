@@ -6,7 +6,7 @@ import * as Kafka from 'kafkajs';
  * @param topic - topic that matches producer
  *
  */
-const createConsumer = async (groupId: string, topic: string) => {
+const createConsumer = async (groupId: string, topic: string): Promise<void> => {
   // Creating a new Kafka instance
   // Configure AWS IAM client with kafka broker
   const kafka = new Kafka.Kafka({
@@ -33,12 +33,11 @@ const createConsumer = async (groupId: string, topic: string) => {
     // autoCommitInterval: 5000,
     // eachMessage: awsConnector.sendEachMessage, -> to send to the DB
     eachMessage: async ({ topic, partition, message }) => {
-      console.log(message);
+      console.log('this is the message', message);
       try {
         // listen for each message being sent, and then send the messages to the DB
         console.log('anything');
         console.log({
-          key: message.key.toString(),
           value: JSON.parse(message.value!.toString()),
           headers: message.headers,
         });

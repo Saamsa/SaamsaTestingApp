@@ -5,39 +5,41 @@ import * as faker from 'faker';
  * @returns an object with case information
  */
 
-const createCaseReport = () => {
-  // Assign proper datatypes
-  interface covidPositive {
-    eventId: string,
-    eventDateTime: Date, 
-    eventName: string, 
-    firstName: string, 
-    lastName: string,
-    middleName: string,
-    gender: string,
-    street: string,
-    street2:string,
-    city: string,
-    county: string,
-    state: string,
-    zip: number,
-    latitude: number,
-    longitude: number, 
-    phone: number,
-    email: string,  
-    jobArea: string, 
-    jobTitle: string,
-    nameLastContact: string,
-    dateLastContact: Date,
-    countryLastTravel: string,
-    dateLastTravel: Date,
-  }
-  
+const newEvent = 'initial_report2';
+
+// Create object datatype interface and assign proper datatypes
+interface CovidPositive {
+  eventName: string, 
+  eventId: string,
+  eventDateTime: Date, 
+  firstName: string, 
+  lastName: string,
+  middleName: string,
+  gender: string,
+  street: string,
+  street2:string,
+  city: string,
+  county: string,
+  state: string,
+  zip: string,
+  latitude: string,
+  longitude: string,
+  phone: string,
+  email: string,  
+  jobArea: string, 
+  jobTitle: string,
+  nameLastContact: string,
+  dateLastContact: Date,
+  countryLastTravel: string,
+  dateLastTravel: Date,
+}
+
+const createCaseReport = (): CovidPositive => {
   // Declare an object with case information
-  const covidPositive = {
+  const covidPositive: CovidPositive = {
+    eventName: newEvent,
     eventId: faker.datatype.uuid(),
-    eventTimstamp: faker.datatype.datetime(),
-    eventName: 'initial_report2',
+    eventDateTime: faker.datatype.datetime(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     middleName: faker.name.middleName(),
@@ -63,4 +65,4 @@ const createCaseReport = () => {
   return covidPositive;
 };
 
-export { createCaseReport };
+export { CovidPositive, createCaseReport };

@@ -7,8 +7,33 @@
     <title>Document</title>
   </head>
   <body>
-    <button id="createData">Create Data</button>
-    <button id="addConsumer">Add Consumer</button>
+    <div class="admin">
+      <h2>Create a topic</h2>
+      <label for="topic">Enter topic name:</label>
+      <input type="text" id="topic" required>
+      <br>
+      <label for="numPartitions">Enter number of partitions:</label>
+      <input type="text" id="numPartitions" required>
+      <br>
+      <button id="createTopic">Create</button>
+    </div>
+   
+    <div class="producer">
+      <h2>Write to topic</h2>
+      <label for="allTopicsCreated">Choose a topic:</label>
+      <select id="allTopicsCreated"></select>
+      <br><br>
+      <button id="writeTopic">Write</button>
+    </div>
+
+    <div class="consumer">
+      <h2>Read from topic</h2>
+      <label for="allTopicsWritten">Choose a topic:</label>
+      <select id="allTopicsWritten"></select>
+      <br><br>
+      <button id="readTopic">Read</button>
+    </div>
+
     <script src="index.js"></script>
   </body>
 </html>

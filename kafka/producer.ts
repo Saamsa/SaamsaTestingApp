@@ -1,10 +1,12 @@
 import { Kafka } from 'kafkajs';
+import { CovidPositive } from '../client/contactTracing';
+
 
 async function createProducer(
   producerName: string,
-  message: Record<string, unknown>,
+  message: CovidPositive,
   topic: string
-) {
+) :Promise<void> {
   // Configure the client to a seed broker
   const kafka = new Kafka({
     clientId: producerName,
@@ -25,7 +27,7 @@ async function createProducer(
   try {
     await producer.send({
       topic: topic,
-      messages: [{ key: 'initial_report', value: JSON.stringify(message) }],
+      messages: [{ value: JSON.stringify(message) }],
       //could also specify key [{ key: 'my-key', value: 'my-value'}],
       //other options: partition, timestamp, headers
       //acks: -1 all, 0 none, 1 just leader (default is -1)
