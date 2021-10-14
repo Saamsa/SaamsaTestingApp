@@ -7,10 +7,10 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+      
   kafka:
     image: 'bitnami/kafka:latest'
     container_name: 'kafka'
-
     ports:
       - '29092:29092'
       - '29093:29093'
@@ -25,9 +25,9 @@ services:
     depends_on:
       - zookeeper
 
-  saamsa-testing-app:
-    image: saamsa-testing-app
-    container_name: 'saamsa-testing-app'
+  saamsaTestingApp:
+    image: saamsa/testing_app:latest
+    container_name: 'saamsaTestingApp'
     ports:
       - '3000:3000'
     depends_on:
