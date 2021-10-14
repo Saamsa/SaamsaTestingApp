@@ -5,7 +5,7 @@ async function createProducer(
   producerName: string,
   message: messageInterface,
   topic: string
-) {
+) :Promise<void> {
   // Configure the client to a seed broker
   const kafka = new Kafka({
     clientId: producerName,

@@ -21,7 +21,7 @@ const ddb = new AWS.DynamoDB.DocumentClient(config);
  * @param topic - topic that matches producer
  *
  */
-const createConsumer = async (groupId: string, topic: string) => {
+const createConsumer = async (groupId: string, topic: string): Promise<void> => {
   // Creating a new Kafka instance
   const kafka = new Kafka.Kafka({
     clientId: groupId,

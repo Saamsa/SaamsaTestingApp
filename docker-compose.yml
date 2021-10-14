@@ -24,9 +24,10 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+    restart: always
 
   saamsaTestingApp:
-    image: saamsa/testing_app:latest
+    image: testing_app
     container_name: 'saamsaTestingApp'
     ports:
       - '3000:3000'
