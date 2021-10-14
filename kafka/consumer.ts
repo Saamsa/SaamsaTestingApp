@@ -2,13 +2,13 @@ import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
 import * as dotenv from "dotenv";
 import { messageInterface } from "../messageInterface";
-dotenv.config({ path: __dirname+'../.env' });
+dotenv.config({ path: __dirname+'./.env' });
 
 // config details required to connect to AWS on server 
 
 const config = {
-    accessKeyId: 'AKIA4M34FWRC5KKYFA6Z',
-    secretAccessKey: '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', 
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, 
     region: 'us-east-1',
     endpoint: 'dynamodb.us-east-1.amazonaws.com'
 };
