@@ -10,14 +10,16 @@ import path from 'path';
 
 const app = express();
 app.use(express.static(path.join(__dirname, '/')));
+
+// create data using faker.js API and create a producer with that information
 app.get('/createData', (req, res) => {
-  console.log('here');
   const covidPositiveCase = createCaseReport();
+  console.log('**new data created in createCaseReport: ', covidPositiveCase);
   createProducer(
     'covid_positive_case_report',
     covidPositiveCase,
-    covidPositiveCase.eventName
-  );
+    covidPositiveCase.eventName!
+    );
   res.sendStatus(200);
 });
 app.get('/addConsumer', (req, res) => {
