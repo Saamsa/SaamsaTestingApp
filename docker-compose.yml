@@ -1,19 +1,20 @@
 version: '3'
 services:
   zookeeper:
-    image: 'bitnami/zookeeper:latest'
+    image: 'zookeeper:latest'
     container_name: 'zookeeper'
+
     ports:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'fogsyio/kafka:arm64v8-2.2.0'
     container_name: 'kafka'
+   
 
     ports:
       - '29092:29092'
-      - '29093:29093'
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_LISTENERS=EXTERNAL_SAME_HOST://0.0.0.0:29092,INTERNAL://:9092,EXTERNAL_DIFFERENT_HOST://:29093
