@@ -8,6 +8,7 @@ services:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+      
   kafka:
     image: 'fogsyio/kafka:arm64v8-2.2.0'
     container_name: 'kafka'
@@ -25,10 +26,11 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
+    restart: always
 
-  testing:
-    image: testing2
-    container_name: saamsaTestingApp
+  saamsaTestingApp:
+    image: testing_app
+    container_name: 'saamsaTestingApp'
     ports:
       - '3000:3000'
     depends_on:

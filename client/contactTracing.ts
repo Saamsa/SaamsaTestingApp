@@ -1,4 +1,5 @@
 import * as faker from 'faker';
+import type {messageInterface} from "../messageInterface"
 
 /**
  * @function createCaseReport creates a fake covid positive case report
@@ -6,37 +7,10 @@ import * as faker from 'faker';
  */
 
 const createCaseReport = () => {
-  // Assign proper datatypes
-  interface covidPositive {
-    eventId: string,
-    eventDateTime: string, 
-    eventName: string, 
-    firstName: string, 
-    lastName: string,
-    middleName: string,
-    gender: string,
-    street: string,
-    street2:string,
-    city: string,
-    county: string,
-    state: string,
-    zip: number,
-    latitude: number,
-    longitude: number, 
-    phone: number,
-    email: string,  
-    jobArea: string, 
-    jobTitle: string,
-    nameLastContact: string,
-    dateLastContact: string,
-    countryLastTravel: string,
-    dateLastTravel: string,
-  }
-  
   // Declare an object with case information
-  const covidPositive = {
+  const covidPositive: messageInterface = {
     eventId: faker.datatype.uuid(),
-    eventTimstamp: faker.datatype.datetime(),
+    // eventTimestamp: faker.datatype.datetime(),
     eventName: 'initial_report2',
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
@@ -55,11 +29,10 @@ const createCaseReport = () => {
     jobArea: faker.name.jobArea(), 
     jobTitle: faker.name.jobTitle(),
     nameLastContact: faker.name.firstName(),
-    dateLastContact: faker.date.past(),
+    // dateLastContact: faker.date.past(),
     countryLastTravel: faker.address.country(), 
-    dateLastTravel: faker.date.past(),
+    // dateLastTravel: faker.date.past(),
   };
-
   return covidPositive;
 };
 
