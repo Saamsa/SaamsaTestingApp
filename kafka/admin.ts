@@ -28,7 +28,7 @@ const createAdmin: createAdmin = {
 
       const admin = kafka.admin();
       await admin.connect();
-      await admin.createTopics({
+      const result = await admin.createTopics({
         waitForLeaders: true,
         topics: [
           {
@@ -42,7 +42,11 @@ const createAdmin: createAdmin = {
         `Topic ${topic} has been created with ${numPartitions} partitions!`
       );
       await admin.disconnect();
-      return next();
+      if (result) return next();
+      else
+        throw new Error(
+          'failed to create new topic, that topic may already exist or it may have too many partitions'
+        );
     } catch (error) {
       return next(error);
     }

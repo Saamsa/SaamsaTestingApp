@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         method: 'POST',
       }
-    );
+    ).then(() => {
+      window.location.reload();
+    });
   });
 
   document.querySelector('#writeTopic').addEventListener('click', () => {

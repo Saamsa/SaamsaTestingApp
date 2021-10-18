@@ -9,17 +9,14 @@ const cache =
     next: express.NextFunction
   ): void => {
     const key = `__express__${req.originalUrl || req.url}`;
-    console.log(key);
     const cachedBody = memCache.get(key);
 
     res.locals.sendResponse = (body: string[]) => {
       memCache.put(key, body, duration * 1000);
-      console.log('put body into cache');
       return res.send(body);
     };
 
     if (cachedBody) {
-      console.log('retrieved from cache');
       res.send(cachedBody);
       return;
     }

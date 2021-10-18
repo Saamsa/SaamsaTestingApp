@@ -3,7 +3,6 @@ import { createCaseReport } from './client/contactTracing';
 import { createConsumer } from './kafka/consumer';
 import createAdmin from './kafka/admin';
 import cache from './kafka/cache';
-import memCache from 'memory-cache';
 import express from 'express';
 import path from 'path';
 
