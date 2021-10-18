@@ -3,7 +3,7 @@ import { createCaseReport } from './client/contactTracing';
 import { createConsumer } from './kafka/consumer';
 import createAdmin from './kafka/admin';
 import cache from './kafka/cache';
-// import mcache from 'memory-cache';
+import memCache from 'memory-cache';
 import express from 'express';
 import path from 'path';
 
@@ -12,17 +12,15 @@ import path from 'path';
  * Initializes a producer with this data
  */
 
-
 const app = express();
 app.use(express.static(path.join(__dirname, '/')));
 
-//CACHE THE TOPICS SO WE DONT HAVE TO QUERY KAFKA? 
+//CACHE THE TOPICS SO WE DONT HAVE TO QUERY KAFKA?
 app.get('/getAllTopics', cache(100), createAdmin.getAllTopics, (req, res) => {
-  const {sendResponse} = res.locals;
+  const { sendResponse } = res.locals;
   res.status(200);
   sendResponse([...res.locals.allTopics]);
 });
-
 //EVERY TIME TOPIC IS WRITTEN, SAVE IT IN A CACHE SOMEWHERE??
 // app.get('/getAllTopicsWritten', createAdmin.getAllTopics, (req, res) => {
 //   res.status(200).json([...res.locals.allTopics]);
@@ -44,17 +42,14 @@ app.get('/writeTopic', (req, res) => {
     'covid_positive_case_report', //maps to producer name
     // producerName,
     covidPositiveCase, //maps to message
-    topic //maps to topic 
-  )
+    topic //maps to topic
+  );
   res.sendStatus(200);
 });
 
 app.get('/readTopic', (req, res) => {
   const topic = req.query.topic as string;
-  createConsumer(
-    'CovidGroup2',
-    topic
-  );
+  createConsumer('CovidGroup2', topic);
   res.sendStatus(200);
 });
 
