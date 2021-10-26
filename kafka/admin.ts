@@ -61,7 +61,11 @@ const createAdmin: createAdmin = {
 
       const admin = kafka.admin();
       await admin.connect();
-      const allTopics = await admin.listTopics();
+      let allTopics = await admin.listTopics();
+     
+      allTopics = allTopics.filter( topic => {
+        if (topic !== '__consumer_offsets') return topic;
+      });
       console.log(
         `These are all the topics on the specified brokers: ${allTopics}`
       );
