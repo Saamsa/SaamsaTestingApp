@@ -5,34 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <base href="/">
+    <link rel="stylesheet" href="styles.css" type="text/css" >
   </head>
   <body>
     <div class="admin">
-      <h2>Create a topic</h2>
-      <label for="topic">Enter topic name:</label>
-      <input type="text" id="topic" required>
-      <br>
-      <label for="numPartitions">Enter number of partitions:</label>
-      <input type="text" id="numPartitions" required>
-      <br>
-      <button id="createTopic">Create</button>
-    </div>
-   
-    <div class="producer">
-      <h2>Write to topic</h2>
-      <label for="allTopicsCreated">Choose a topic:</label>
-      <select id="allTopicsCreated"></select>
-      <br><br>
-      <button id="writeTopic">Write</button>
-    </div>
 
-    <div class="consumer">
-      <h2>Read from topic</h2>
-      <label for="allTopicsWritten">Choose a topic:</label>
-      <select id="allTopicsWritten"></select>
-      <br><br>
-      <button id="readTopic">Read</button>
-    </div>
+      <div class='mainTitle'>
+      <h1 >Saamsa Demo App</h1>
+      </div>
+
+      <div class="mainWrapper">
+        <div class="inputBox">
+            <h2>Create a topic</h2>
+            <div class='divOfInputfieldsAndLabels'>
+                <div class="labelAndInput">
+                <label class="title" for="topic">Enter topic name:</label>
+                <input class="input" type="text" id="topic" required>
+                </div>
+              <br>
+              <div class="labelAndInput">
+                <label class="title" for="numPartitions">Enter number of partitions:</label>
+                <input class="input" type="text" id="numPartitions" required>
+              </div>
+            </div>
+            <br>
+            <button class="button" id="createTopic">Create</button>
+        </div>
+    
+        <div class="inputBox">
+          <h2>Write to topic</h2>
+          <div class="labelAndInput">
+            <label class="title" for="allTopicsCreated">Choose a topic:</label>
+            <select class="input" id="allTopicsCreated"></select>
+          </div>
+          <br><br>
+          <button class="button" id="writeTopic">Write</button>
+        </div>
+
+      <div class="inputBox">
+          <h2>Read from topic</h2>
+          <div class="labelAndInput">
+            <label class="title" for="allTopicsWritten">Choose a topic:</label>
+            <select class="input" id="allTopicsWritten"></select>
+          </div>
+          <br><br>
+          <button class="button" id="readTopic">Read</button>
+      </div>
+      </div>
+  </div>
 
     <script src="index.js"></script>
   </body>
