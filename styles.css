@@ -52,8 +52,10 @@ h2{
   align-items: center;
   margin-top: 10px;
   border-style: groove;
-  border-color: #BE8E0C;
+  border-color: #F5CD6C;
   /* setting height and width of input boxes*/
+   /* #F5CD6C; */
+
   width: 350px;
   height: 200px;
   background-color: #F5CD6C;
@@ -71,19 +73,9 @@ h2{
     align:left;
 }
 .button{
-position: absolute;
-right:    0;
-bottom:   0;
-}
-.choosingATopic{
-    text-align: left;
-    border: solid;
-    color:white;
-}
-.input{
-    width:120px;
-}
-.button{
+    position: absolute;
+    bottom: 10px;
+/*  */
     background-color: #251C1B;
     border: none;
     color: white;
@@ -93,7 +85,15 @@ bottom:   0;
     display: inline-block;
     font-size: 16px;
     float:none;
-    width: 25%;
+    width: 75px;
+}
+.choosingATopic{
+    text-align: left;
+    border: solid;
+    color:white;
+}
+.input{
+    width:120px;
 }
 .button:hover {
     cursor: pointer;
