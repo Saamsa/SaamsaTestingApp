@@ -3,34 +3,28 @@ services:
   zookeeper:
     image: 'zookeeper:latest'
     container_name: 'zookeeper'
-
     ports:
       - '2181:2181'
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
-
   kafka:
     image: 'fogsyio/kafka:arm64v8-2.2.0'
     container_name: 'kafka'
-   
-
     ports:
       - '29092:29092'
     environment:
       - KAFKA_BROKER_ID=1
       - KAFKA_LISTENERS=EXTERNAL_SAME_HOST://0.0.0.0:29092,INTERNAL://:9092,EXTERNAL_DIFFERENT_HOST://:29093
-      - KAFKA_ADVERTISED_LISTENERS=INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092,EXTERNAL_DIFFERENT_HOST://143.244.170.133:29093
+      - KAFKA_ADVERTISED_LISTENERS=INTERNAL://kafka:9092,EXTERNAL_SAME_HOST://localhost:29092,EXTERNAL_DIFFERENT_HOST://:157.245.80.232:29093
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=INTERNAL:PLAINTEXT,EXTERNAL_SAME_HOST:PLAINTEXT,EXTERNAL_DIFFERENT_HOST:PLAINTEXT
       - KAFKA_INTER_BROKER_LISTENER_NAME=INTERNAL
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
-    restart: always
-
-  saamsaTestingApp:
-    image: saamsa/testing_app
-    container_name: 'saamsaTestingApp'
+  testing:
+    image: testing_app
+    container_name: saamsaTestingApp
     ports:
       - '3000:3000'
     depends_on:
