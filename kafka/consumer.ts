@@ -24,10 +24,11 @@ const createConsumer = async (groupId: string, topic: string): Promise<void> => 
   // Creating a new Kafka instance
   const kafka = new Kafka.Kafka({
     clientId: groupId,
+    // ssl: true,
     brokers: ["kafka:9092"]
   });
   // Creating kafka consumer with required group ID
-  const consumer = kafka.consumer({ groupId: "test-group2" });
+  const consumer = kafka.consumer({ groupId});
   //  kafka.consumer.groupId = {groupId};
 
   await consumer.connect();

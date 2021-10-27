@@ -1,0 +1,101 @@
+
+body{
+    background-color: #251C1B;
+    width: 80%;
+    height:80%
+}
+
+.mainTitle{
+    height: 80px;
+    width: 100%; /** Use 100% to fill the width of the page **/
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    background-color: #251C1B;
+    align-items: center;
+
+    /* top:198px;
+    left:365px; */
+    /* width:62px;
+    height:51px; */
+    color:#FFFFFF;
+    position:absolute;
+    text-align:center;
+}
+h1{
+    color:#FFFFFF;
+    margin-top: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin:auto;
+    margin-top: 7px;
+    line-height:61px;
+    vertical-align:middle;
+}
+h2{
+    color: #FFFFFF;
+}
+.mainWrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    /* aligning the div in the centre*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  /* gap: 40px; */
+  align-items: center;
+  margin-top: 10px;
+  border-style: groove;
+  border-color: #F5CD6C;
+  /* setting height and width of input boxes*/
+   /* #F5CD6C; */
+
+  width: 350px;
+  height: 200px;
+  background-color: #F5CD6C;
+  left: 5px;
+  float: left;
+}
+.labelAndInput{
+    color: white;
+    display:flex;
+    flex-direction: row;
+    gap:5px;
+    align-items: left;
+}
+.title{
+    align:left;
+}
+.button{
+    position: absolute;
+    bottom: 10px;
+/*  */
+    background-color: #251C1B;
+    border: none;
+    color: white;
+    padding: 0.5em 1.2em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    float:none;
+    width: 75px;
+}
+.choosingATopic{
+    text-align: left;
+    border: solid;
+    color:white;
+}
+.input{
+    width:120px;
+}
+.button:hover {
+    cursor: pointer;
+  }

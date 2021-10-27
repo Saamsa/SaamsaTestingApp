@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "start": "docker build . -t testing_app && docker compose up -d",
+    "start": "docker build -t testing_app . && docker compose up -d",
     "kill": "killall docker && killall node && npx kill-port 3000 29092 29093",
     "test": "echo && exit 0"
   },
