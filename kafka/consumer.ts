@@ -2,15 +2,14 @@ import * as Kafka from "kafkajs";
 import AWS from "aws-sdk";
 import * as dotenv from "dotenv";
 import { messageInterface } from "../messageInterface";
-dotenv.config({ path: __dirname+'./.env' });
 
 // config details required to connect to AWS on server 
-
+dotenv.config();
 const config = {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY, 
+    accessKeyId: process.env.ACCESS_KEY_ID,
+    secretAccessKey: process.env.SECRET_ACCESS_KEY, 
     region: 'us-east-1',
-    endpoint: 'dynamodb.us-east-1.amazonaws.com'
+    endpoint: 'dynamodb.us-east-1.amazonaws.com',
 };
 // New instantiation of DynamoDB with config details passed in directly
 const ddb = new AWS.DynamoDB.DocumentClient(config); 
@@ -58,7 +57,7 @@ const createConsumer = async (groupId: string, topic: string): Promise<void> => 
 
 // add code to insert data into dynamoDB
 
-const sendToDb = async (tableName: string, messageObj: messageInterface) => {
+const sendToDb = (tableName: string, messageObj: messageInterface) => {
 // create param types
   type params = {
     TableName: string;
