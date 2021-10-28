@@ -56,6 +56,6 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, './index.html'));
 });
 
-app.listen(3000, () => {
-  console.log('running on 3000 :) ');
+app.listen(80, () => {
+  console.log('running on 80 :) ');
 });
