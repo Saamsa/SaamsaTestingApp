@@ -26,11 +26,6 @@ body{
     margin: 0 auto;
     background-color: var(--brown);
     align-items: center;
-
-    /* top:198px;
-    left:365px; */
-    /* width:62px;
-    height:51px; */
     color:#FFFFFF;
     position:absolute;
     text-align:center;
@@ -56,7 +51,6 @@ h2{
     flex-direction: row;
     gap: 10px;
     align-items: center;
-    /* aligning the div in the centre*/
     position: fixed;
     top: 50%;
     left: 50%;
@@ -65,14 +59,12 @@ h2{
 .inputBox{
   display: flex;
   flex-direction: column;
-  /* gap: 40px; */
   align-items: center;
   margin-top: 10px;
   border-style: groove;
   border-color: #F5CD6C;
-  /* setting height and width of input boxes*/
-   /* #F5CD6C; */
 
+  /* setting height and width of input boxes*/
   width: 350px;
   height: 200px;
   background-color: #F5CD6C;
@@ -97,7 +89,6 @@ h2{
     background-color: #ffcd0754;
     border: 1px solid var(--brown);
     color: white;
-    /* padding: 0.5em 1.2em; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
