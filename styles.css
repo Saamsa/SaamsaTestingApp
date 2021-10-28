@@ -1,8 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@600&family=Roboto+Mono:wght@100&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+
+:root {
+    --saamsaYellow : #FFCC07;
+    --saamsaBlack: #000000;
+    --saamsaGrey: #CED4DA;
+    --saamsaWhite: #FFFFFF;
+    --brown: #251C1B; 
+  }
+  
+
 body{
-    background-color: #251C1B;
+    background-color: var(--brown);
     width: 80%;
     height:80%
 }
@@ -14,7 +24,7 @@ body{
     left: 0;
     right: 0;
     margin: 0 auto;
-    background-color: #251C1B;
+    background-color: var(--brown);
     align-items: center;
 
     /* top:198px;
@@ -24,6 +34,9 @@ body{
     color:#FFFFFF;
     position:absolute;
     text-align:center;
+    font-size: xxx-large;
+    padding-top: 1.5em;
+
 }
 h1{
     color:#FFFFFF;
@@ -75,21 +88,24 @@ h2{
 }
 .title{
     align:left;
+    font-family: Overpass;
+    font-size: medium;
 }
 .button{
     position: absolute;
     bottom: 10px;
-/*  */
-    background-color: #251C1B;
-    border: none;
+    background-color: #ffcd0754;
+    border: 1px solid var(--brown);
     color: white;
-    padding: 0.5em 1.2em;
+    /* padding: 0.5em 1.2em; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-family: Overpass;
+    font-size: large;
     float:none;
     width: 75px;
+    border-radius: 4px;
 }
 .choosingATopic{
     text-align: left;
