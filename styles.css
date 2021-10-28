@@ -88,7 +88,7 @@ h2{
 }
 .title{
     align:left;
-    font-family: Overpass;
+    font-family: 'Overpass';
     font-size: medium;
 }
 .button{
@@ -101,7 +101,7 @@ h2{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-family: Overpass;
+    font-family: 'Overpass';
     font-size: large;
     float:none;
     width: 75px;
