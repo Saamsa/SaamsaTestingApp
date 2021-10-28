@@ -27,7 +27,7 @@ services:
     restart: always
 
   saamsaTestingApp:
-    image: saamsa/testing_app
+    image: saamsa/testing_app_website
     container_name: 'saamsaTestingApp'
     ports:
       - '80:80'
