@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const getAllTopics = () => {
-    fetch('http://143.244.170.133:3000/getAllTopics')
+    fetch('http://demo.saamsa.io/getAllTopics')
       .then((res) => res.json())
       .then((topics) => {
         // console.log(topics);
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#topic').value = null;
     document.querySelector('#numPartitions').value = null;
     fetch(
-      `http://143.244.170.133:3000/createTopic?topic=${topic}&numPartitions=${numPartitions}`,
+      `http://demo.saamsa.io/createTopic?topic=${topic}&numPartitions=${numPartitions}`,
       {
         method: 'POST',
       }
@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('#writeTopic').addEventListener('click', () => {
     const selected = document.querySelector('#allTopicsCreated').value;
-    fetch(`http://143.244.170.133:3000/writeTopic?topic=${selected}`);
+    fetch(`http://demo.saamsa.io/writeTopic?topic=${selected}`);
   });
 
   document.querySelector('#readTopic').addEventListener('click', () => {
     const selected = document.querySelector('#allTopicsWritten').value;
-    fetch(`http://143.244.170.133:3000/readTopic?topic=${selected}`);
+    fetch(`http://demo.saamsa.io/readTopic?topic=${selected}`);
   });
 });
