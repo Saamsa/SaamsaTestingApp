@@ -59,15 +59,15 @@ app.get('/', (req, res) => {
 });
 
 const privateKey = fs.readFileSync(
-  '/usr/src/app/httpCerts/live/saamsa.io/privkey.pem',
+  '/usr/src/app/httpCerts/live/demo.saamsa.io/privkey.pem',
   'utf8'
 );
 const certificate = fs.readFileSync(
-  '/usr/src/app/httpCerts/live/saamsa.io/cert.pem',
+  '/usr/src/app/httpCerts/live/demo.saamsa.io/cert.pem',
   'utf8'
 );
 const ca = fs.readFileSync(
-  '/usr/src/app/httpCerts/live/saamsa.io/chain.pem',
+  '/usr/src/app/httpCerts/live/demo.saamsa.io/chain.pem',
   'utf8'
 );
 const credentials = {
