@@ -4,6 +4,8 @@ import { createConsumer } from './kafka/consumer';
 import createAdmin from './kafka/admin';
 import cache from './kafka/cache';
 import express from 'express';
+import https from 'https';
+import fs from 'fs';
 import path from 'path';
 
 /**
@@ -56,6 +58,29 @@ app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, './index.html'));
 });
 
-app.listen(80, () => {
-  console.log('running on 80 :) ');
+const privateKey = fs.readFileSync(
+  '/etc/letsencrypt/live/saamsa.io/privkey.pem',
+  'utf8'
+);
+const certificate = fs.readFileSync(
+  '/etc/letsencrypt/live/saamsa.io/cert.pem',
+  'utf8'
+);
+const ca = fs.readFileSync('/etc/letsencrypt/live/saamsa.io/chain.pem', 'utf8');
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: ca,
+};
+const httpsServer = https.createServer(credentials, app);
+httpsServer.listen(443, () => {
+  'https server listening on 443 :)';
+});
+const httpServer = express();
+httpServer.use('*', (req, res) => {
+  res.redirect('https://demo.saamsa.io');
+});
+
+httpServer.listen(80, () => {
+  console.log('http redirecting server running on 80 :) ');
 });
