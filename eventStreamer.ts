@@ -77,7 +77,7 @@ const credentials = {
 };
 const httpsServer = https.createServer(credentials, app);
 httpsServer.listen(443, () => {
-  'https server listening on 443 :)';
+  console.log('https server listening on 443 :)');
 });
 const httpServer = express();
 httpServer.use('*', (req, res) => {

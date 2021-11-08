@@ -31,5 +31,6 @@ services:
     container_name: 'saamsaTestingApp'
     ports:
       - '443:443'
+      - '80:80'
     depends_on:
       - kafka
