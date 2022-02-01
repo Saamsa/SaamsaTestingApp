@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const getAllTopics = () => {
-    fetch('http://demo.saamsa.io/getAllTopics')
+    fetch('https://demo.saamsa.io/getAllTopics')
       .then((res) => res.json())
       .then((topics) => {
         // console.log(topics);
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#topic').value = null;
     document.querySelector('#numPartitions').value = null;
     fetch(
-      `http://demo.saamsa.io/createTopic?topic=${topic}&numPartitions=${numPartitions}`,
+      `https://demo.saamsa.io/createTopic?topic=${topic}&numPartitions=${numPartitions}`,
       {
         method: 'POST',
       }
@@ -37,11 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelector('#writeTopic').addEventListener('click', () => {
     const selected = document.querySelector('#allTopicsCreated').value;
-    fetch(`http://demo.saamsa.io/writeTopic?topic=${selected}`);
+    fetch(`https://demo.saamsa.io/writeTopic?topic=${selected}`);
   });
 
   document.querySelector('#readTopic').addEventListener('click', () => {
     const selected = document.querySelector('#allTopicsWritten').value;
-    fetch(`http://demo.saamsa.io/readTopic?topic=${selected}`);
+    fetch(`https://demo.saamsa.io/readTopic?topic=${selected}`);
   });
 });
